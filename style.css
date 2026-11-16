@@ -90,6 +90,7 @@ a.btn:hover{background:#000}
 .foot-brand .logo{font-size:1.6rem;color:#fff}
 .foot-brand p{margin:12px 0 0;max-width:300px;color:#9aa1a8}
 .foot-col{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.foot-col a{display:block}
 .foot-col h4{margin:0 0 4px;font-size:.8rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#fff}
 .site-foot a{color:#c9ced3;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.2)}
 .site-foot a:hover{color:#fff;border-color:var(--green)}
