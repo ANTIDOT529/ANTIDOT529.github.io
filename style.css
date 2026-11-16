@@ -6,9 +6,9 @@
 :root{--ink:#202020;--green:#74B67E;--muted:#5d6268;--line:rgba(32,32,32,.12);--text:#33383d}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:Manrope,system-ui,Segoe UI,Roboto,sans-serif;color:var(--ink);line-height:1.55;
+body{position:relative;overflow-x:clip;margin:0;font-family:Manrope,system-ui,Segoe UI,Roboto,sans-serif;color:var(--ink);line-height:1.55;
      background:radial-gradient(120% 90% at 50% 0%,#F5F6F8 0%,#D9DEE2 100%) fixed;min-height:100vh}
-.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
 a:focus-visible,.btn:focus-visible{outline:3px solid var(--green);outline-offset:3px}
 
 /* логотип: «О» это капсула с залитой нижней половиной и зелёным плюсом */
@@ -130,3 +130,19 @@ section,[id]{scroll-margin-top:72px}
 .site-foot a:focus-visible{outline:3px solid var(--green);outline-offset:3px}
 .foot-end{padding-top:20px;padding-bottom:28px;border-top:1px solid rgba(255,255,255,.1);color:#8a9198;font-size:.85rem}
 @media(min-width:820px){.foot-grid{grid-template-columns:1.4fr 1fr 1.2fr 1.4fr}}
+
+/* декор по бокам на широких экранах */
+body::before,body::after{content:"";position:absolute;z-index:-1;pointer-events:none;background:no-repeat center/contain;display:none}
+body::before{width:300px;height:600px;left:max(-60px,calc(50% - 1100px));top:160px;transform:rotate(-14deg);opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 40'%3E%3Crect x='1.5' y='1.5' width='17' height='37' rx='8.5' fill='none' stroke='%23202020' stroke-width='1.2'/%3E%3Cpath d='M1.5 20h17v10a8.5 8.5 0 0 1-8.5 8.5h0A8.5 8.5 0 0 1 1.5 30z' fill='%23202020'/%3E%3Crect x='8' y='14' width='4' height='12' rx='.8' fill='%2374B67E'/%3E%3Crect x='4' y='18' width='12' height='4' rx='.8' fill='%2374B67E'/%3E%3C/svg%3E")}
+body::after{width:240px;height:480px;right:max(-40px,calc(50% - 1080px));top:900px;transform:rotate(12deg);opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 40'%3E%3Crect x='1.5' y='1.5' width='17' height='37' rx='8.5' fill='none' stroke='%23202020' stroke-width='1.2'/%3E%3Cpath d='M1.5 20h17v10a8.5 8.5 0 0 1-8.5 8.5h0A8.5 8.5 0 0 1 1.5 30z' fill='%23202020'/%3E%3Crect x='8' y='14' width='4' height='12' rx='.8' fill='%2374B67E'/%3E%3Crect x='4' y='18' width='12' height='4' rx='.8' fill='%2374B67E'/%3E%3C/svg%3E")}
+.glow{position:absolute;z-index:-1;pointer-events:none;border-radius:50%;filter:blur(70px);display:none}
+.glow.a{width:420px;height:420px;left:calc(50% - 1000px);top:520px;background:rgba(116,182,126,.28)}
+.glow.b{width:380px;height:380px;right:calc(50% - 980px);top:1250px;background:rgba(116,182,126,.22)}
+@media(min-width:1300px){body::before,body::after,.glow{display:block}}
+
+/* телефоны в шапке */
+.hero{position:relative}
+.hero-shot{display:none;position:absolute;top:24px;width:165px;height:auto;border-radius:22px;box-shadow:0 24px 60px rgba(32,32,32,.28);background:#cfd4d8}
+.hero-shot.l{left:calc(50% - 560px);transform:rotate(-8deg)}
+.hero-shot.r{right:calc(50% - 560px);transform:rotate(8deg)}
+@media(min-width:1180px){.hero-shot{display:block}.hero{padding-bottom:clamp(64px,7vw,96px)}}
