@@ -4,30 +4,130 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ANTIDOT: игры для Android</title>
+<meta name="description" content="ANTIDOT, небольшая студия простых и добрых игр для Android: Blobbi и Yardlock.">
+<meta name="theme-color" content="#F5F6F8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 40'%3E%3Crect x='1.5' y='1.5' width='17' height='37' rx='8.5' fill='none' stroke='%23202020' stroke-width='3'/%3E%3Cpath d='M1.5 20h17v10a8.5 8.5 0 0 1-8.5 8.5h0A8.5 8.5 0 0 1 1.5 30z' fill='%23202020'/%3E%3Crect x='8' y='14' width='4' height='12' rx='.8' fill='%2374B67E'/%3E%3Crect x='4' y='18' width='12' height='4' rx='.8' fill='%2374B67E'/%3E%3C/svg%3E">
 <style>
-  body{margin:0;font-family:system-ui,Segoe UI,Roboto,sans-serif;background:#2a1b4d;color:#fff;
-       display:flex;min-height:100vh;align-items:center;justify-content:center;text-align:center}
-  main{max-width:520px;padding:24px}
-  h1{font-size:2.4rem;margin:0 0 8px;letter-spacing:.08em}
-  h2{margin:28px 0 4px}
-  p{color:#d9cdf5;line-height:1.5}
-  a.btn{display:inline-block;margin:16px 0;padding:12px 24px;border-radius:12px;background:#ff5fa2;
-        color:#fff;text-decoration:none;font-weight:600}
-  small a{color:#d9cdf5}
+  @font-face{font-family:Manrope;font-weight:400;font-display:swap;src:url(fonts/manrope-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+  @font-face{font-family:Manrope;font-weight:400;font-display:swap;src:url(fonts/manrope-cyrillic-400-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491}
+  @font-face{font-family:Manrope;font-weight:800;font-display:swap;src:url(fonts/manrope-latin-800-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+  @font-face{font-family:Manrope;font-weight:800;font-display:swap;src:url(fonts/manrope-cyrillic-800-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491}
+
+  :root{--ink:#202020;--green:#74B67E;--muted:#5d6268;--line:rgba(32,32,32,.12)}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Manrope,system-ui,Segoe UI,Roboto,sans-serif;color:var(--ink);line-height:1.55;
+       background:radial-gradient(120% 90% at 50% 0%,#F5F6F8 0%,#D9DEE2 100%) fixed;min-height:100vh}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+  /* логотип: «О» это капсула с залитой нижней половиной и зелёным плюсом */
+  .logo{display:inline-flex;align-items:center;font-weight:800;letter-spacing:.02em;line-height:1}
+  .logo svg{height:1.15em;width:.575em;margin:0 .11em;overflow:visible}
+  .logo svg .plus{fill:var(--green)}
+
+  .hero{padding:clamp(56px,12vw,120px) 0 clamp(40px,8vw,72px);text-align:center}
+  .hero .logo{font-size:clamp(3rem,13vw,7rem)}
+  .slogan{margin:18px 0 0;font-size:clamp(.7rem,2.4vw,.95rem);font-weight:800;letter-spacing:.42em;text-indent:.42em;color:var(--muted)}
+  .lead{max-width:520px;margin:28px auto 0;font-size:1.1rem;color:#33383d}
+
+  h2{font-size:clamp(1.4rem,4vw,1.9rem);margin:0 0 24px;font-weight:800}
+  .games{display:grid;gap:20px}
+  .game{background:rgba(255,255,255,.72);border:1px solid var(--line);border-radius:24px;padding:clamp(20px,4vw,36px);
+        display:grid;gap:24px;grid-template-columns:1fr}
+  .game h3{margin:0;font-size:clamp(1.5rem,4vw,2rem);font-weight:800}
+  .tag{display:inline-flex;align-items:center;gap:8px;margin:0 0 14px;font-size:.85rem;font-weight:800;color:var(--muted)}
+  .tag i{width:9px;height:9px;border-radius:50%;background:var(--green)}
+  .tag i.soon{background:#d8a237}
+  .game p{margin:12px 0 0;color:#33383d}
+  .game p.tag{margin:0 0 14px}
+  .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:start}
+  .shots img{width:100%;height:auto;aspect-ratio:640/1138;border-radius:14px;display:block;background:#cfd4d8;
+             box-shadow:0 8px 24px rgba(32,32,32,.14)}
+  .links{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;margin-top:22px}
+  .btn{display:inline-block;padding:12px 22px;border-radius:12px;background:var(--ink);color:#fff;text-decoration:none;font-weight:800}
+  a.btn:hover{background:#000}
+  .btn:focus-visible,a:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+  .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
+  .links a.text{color:var(--ink);font-weight:800;text-underline-offset:4px}
+  @media(min-width:820px){
+    .game{grid-template-columns:1fr 1fr;align-items:center;gap:40px}
+    .game.flip .shots{order:-1}
+  }
+
+  footer{margin-top:64px;border-top:1px solid var(--line);padding:32px 0 48px;display:grid;gap:20px;font-size:.95rem;color:var(--muted)}
+  footer .cols{display:flex;flex-wrap:wrap;gap:12px 32px}
+  footer a{color:var(--ink);text-underline-offset:4px}
+  footer .logo{font-size:1.3rem;color:var(--ink)}
 </style>
 </head>
 <body>
-<main>
-  <h1>ANTIDOT</h1>
-  <p>Небольшая студия, делающая простые и добрые игры для Android.</p>
-  <h2>Yardlock</h2>
-  <p>Выведи машины из двора: 500 дворов в 10 странах, кот и бабушка на дороге. Играть можно без интернета.</p>
-  <p><small><a href="https://antidot529.github.io/yardlock-privacy/">Политика конфиденциальности Yardlock</a></small></p>
-  <h2>Blobbi</h2>
-  <p>Блочная головоломка про слаймов: собери 9 клеток одного цвета и лопай. Без интернета и без доната.</p>
-  <a class="btn" href="https://www.rustore.ru/catalog/app/com.blobbi.game">Скачать в RuStore</a>
-  <p><small><a href="https://antidot529.github.io/blobbi-privacy/">Политика конфиденциальности Blobbi</a></small></p>
-  <p><small>Вопросы и предложения: <a href="mailto:antidot529contact@gmail.com">antidot529contact@gmail.com</a></small></p>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="cap" viewBox="0 0 20 40">
+      <rect x="1.5" y="1.5" width="17" height="37" rx="8.5" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M1.5 20h17v10a8.5 8.5 0 0 1-8.5 8.5h0A8.5 8.5 0 0 1 1.5 30z" fill="currentColor"/>
+      <rect class="plus" x="8" y="14" width="4" height="12" rx=".8" fill="#74B67E"/>
+      <rect class="plus" x="4" y="18" width="12" height="4" rx=".8" fill="#74B67E"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="logo" role="img" aria-label="ANTIDOT">ANTID<svg aria-hidden="true"><use href="#cap"/></svg>T</div>
+    <p class="slogan">CREATING WORLDS</p>
+    <p class="lead">Небольшая студия, делающая простые и добрые игры для Android. Без доната и без навязчивой рекламы.</p>
+  </div>
+
+  <section id="games">
+    <h2>Игры</h2>
+    <div class="games">
+      <article class="game">
+        <div>
+          <p class="tag"><i></i>Доступна в RuStore</p>
+          <h3>Blobbi</h3>
+          <p>Блочная головоломка про слаймов: собери 9 клеток одного цвета и лопай. Серии и комбо, коллекция из 35 скинов, 63 достижения и ежедневные задания.</p>
+          <p>Играть можно без интернета.</p>
+          <div class="links">
+            <a class="btn" href="https://www.rustore.ru/catalog/app/com.blobbi.game">Скачать в RuStore</a>
+            <a class="text" href="https://antidot529.github.io/blobbi-privacy/">Политика конфиденциальности</a>
+          </div>
+        </div>
+        <div class="shots">
+          <img src="img/blobbi-1.webp" alt="Blobbi: игровое поле" width="640" height="1138" loading="lazy" decoding="async">
+          <img src="img/blobbi-2.webp" alt="Blobbi: коллекция скинов" width="640" height="1138" loading="lazy" decoding="async">
+          <img src="img/blobbi-3.webp" alt="Blobbi: достижения" width="640" height="1138" loading="lazy" decoding="async">
+        </div>
+      </article>
+
+      <article class="game flip">
+        <div>
+          <p class="tag"><i class="soon"></i>Скоро в магазинах</p>
+          <h3>Yardlock</h3>
+          <p>Выведи машины из тесного двора: 500 дворов в 10 странах, кот и бабушка на дороге. Дворы оживают сменой времени суток и погодой.</p>
+          <p>Играть можно без интернета.</p>
+          <div class="links">
+            <span class="btn ghost" aria-disabled="true">Скоро</span>
+            <a class="text" href="https://antidot529.github.io/yardlock-privacy/">Политика конфиденциальности</a>
+          </div>
+        </div>
+        <div class="shots">
+          <img src="img/yard-1.webp" alt="Yardlock: двор с машинами" width="640" height="1138" loading="lazy" decoding="async">
+          <img src="img/yard-2.webp" alt="Yardlock: карта стран" width="640" height="1138" loading="lazy" decoding="async">
+          <img src="img/yard-3.webp" alt="Yardlock: уровень" width="640" height="1138" loading="lazy" decoding="async">
+        </div>
+      </article>
+    </div>
+  </section>
 </main>
+
+<footer class="wrap">
+  <div class="logo" role="img" aria-label="ANTIDOT">ANTID<svg aria-hidden="true"><use href="#cap"/></svg>T</div>
+  <div class="cols">
+    <span>Вопросы и предложения: <a href="mailto:antidot529contact@gmail.com">antidot529contact@gmail.com</a></span>
+    <a href="https://antidot529.github.io/blobbi-privacy/">Политика Blobbi</a>
+    <a href="https://antidot529.github.io/yardlock-privacy/">Политика Yardlock</a>
+  </div>
+</footer>
 </body>
 </html>
