@@ -137,6 +137,17 @@
       attrOrig.set(el, saved);
     });
 
+    // скриншоты: в английском режиме берём кадры с английским текстом из img/en/
+    document.querySelectorAll('img').forEach(function (im) {
+      var cur = im.getAttribute('src');
+      if (!im.hasAttribute('data-ru-src')) {
+        if (!/(^|\/)img\/(blobbi|yard)-\d\.webp$/.test(cur)) return;
+        im.setAttribute('data-ru-src', cur);
+      }
+      var ru = im.getAttribute('data-ru-src');
+      im.setAttribute('src', en ? ru.replace('img/', 'img/en/') : ru);
+    });
+
     document.title = en && EN[titleRu] ? EN[titleRu] : titleRu;
     if (metaEl) metaEl.setAttribute('content', en && EN[metaRu] ? EN[metaRu] : metaRu);
 
