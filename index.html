@@ -40,7 +40,14 @@
   .tag i.soon{background:#d8a237}
   .game p{margin:12px 0 0;color:#33383d}
   .game p.tag{margin:0 0 14px}
-  .shots{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:start}
+  .game p.kind{margin:6px 0 0;font-weight:800;color:var(--muted);font-size:.95rem}
+  .game h4{margin:22px 0 6px;font-size:1rem;font-weight:800}
+  .steps,.feats{margin:0;padding-left:1.2em;color:#33383d}
+  .steps li,.feats li{margin:4px 0}
+  .feats li::marker{color:var(--green)}
+  .facts{list-style:none;margin:20px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+  .facts li{padding:6px 12px;border-radius:999px;background:rgba(32,32,32,.07);font-size:.85rem;font-weight:800}
+  .shots{position:sticky;top:24px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:start}
   .shots img{width:100%;height:auto;aspect-ratio:640/1138;border-radius:14px;display:block;background:#cfd4d8;
              box-shadow:0 8px 24px rgba(32,32,32,.14)}
   .links{display:flex;flex-wrap:wrap;gap:12px 18px;align-items:center;margin-top:22px}
@@ -50,7 +57,7 @@
   .btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}
   .links a.text{color:var(--ink);font-weight:800;text-underline-offset:4px}
   @media(min-width:820px){
-    .game{grid-template-columns:1fr 1fr;align-items:center;gap:40px}
+    .game{grid-template-columns:1fr 1fr;align-items:start;gap:40px}
     .game.flip .shots{order:-1}
   }
 
@@ -86,8 +93,33 @@
         <div>
           <p class="tag"><i></i>Доступна в RuStore</p>
           <h3>Blobbi</h3>
-          <p>Блочная головоломка про слаймов: собери 9 клеток одного цвета и лопай. Серии и комбо, коллекция из 35 скинов, 63 достижения и ежедневные задания.</p>
-          <p>Играть можно без интернета.</p>
+          <p class="kind">Головоломка, Android</p>
+          <p>Блочная головоломка про слаймов. Три фигурки лежат в лотке, ты ставишь их на поле 8 на 8, а когда набирается 9 клеток одного цвета, слайм лопается и освобождает место. Чем длиннее серия и крупнее слияние, тем больше очков.</p>
+          <h4>Как играть</h4>
+          <ol class="steps">
+            <li>Перетащи фигурку из лотка на поле.</li>
+            <li>Собери 9 клеток одного цвета рядом, и они лопнут.</li>
+            <li>Следи за местом: когда фигурку некуда поставить, партия заканчивается.</li>
+          </ol>
+          <h4>Что внутри</h4>
+          <ul class="feats">
+            <li>Серии, комбо и крупные слияния с отдельными наградами</li>
+            <li>Камни, которые ломаются за один или два хлопка</li>
+            <li>Радужный слайм, склеивающий разные цвета</li>
+            <li>Бонусы: разбить клетку и повернуть фигурку</li>
+            <li>35 скинов для слаймов</li>
+            <li>63 достижения за разные подвиги</li>
+            <li>Пять ежедневных заданий и подарок за каждый день</li>
+            <li>Мир на заднем плане меняется по мере роста счёта</li>
+            <li>Напоминания, которые можно отключить</li>
+          </ul>
+          <ul class="facts">
+            <li>Бесплатно</li>
+            <li>Без интернета</li>
+            <li>Русский и английский</li>
+            <li>Без доната</li>
+            <li>Реклама только по желанию, за награду</li>
+          </ul>
           <div class="links">
             <a class="btn" href="https://www.rustore.ru/catalog/app/com.blobbi.game">Скачать в RuStore</a>
             <a class="text" href="https://antidot529.github.io/blobbi-privacy/">Политика конфиденциальности</a>
@@ -104,8 +136,30 @@
         <div>
           <p class="tag"><i class="soon"></i>Скоро в магазинах</p>
           <h3>Yardlock</h3>
-          <p>Выведи машины из тесного двора: 500 дворов в 10 странах, кот и бабушка на дороге. Дворы оживают сменой времени суток и погодой.</p>
-          <p>Играть можно без интернета.</p>
+          <p class="kind">Логическая игра, Android</p>
+          <p>Двор забит машинами, и надо выпустить их все на улицу. Каждая машина едет только вперёд, поэтому важно выбрать правильный порядок. Одна ошибка, и машина упрётся в соседнюю, а жильцы начнут злиться.</p>
+          <h4>Как играть</h4>
+          <ol class="steps">
+            <li>Нажми на машину, и она поедет в ту сторону, куда смотрит нос.</li>
+            <li>Если дорогу перекрыла другая машина, в доме загорится окно сердитого соседа.</li>
+            <li>Четыре сердитых окна, и приедет эвакуатор: двор придётся пройти заново.</li>
+          </ol>
+          <h4>Что внутри</h4>
+          <ul class="feats">
+            <li>500 дворов в 10 странах: Россия, США, Канада, Китай, Индия, Япония, Бразилия, Египет, Франция и Австралия</li>
+            <li>В каждой стране 50 дворов от простых к сложным, на карте путь из городов</li>
+            <li>Двор растёт от маленького 5 на 7 до огромного 12 на 20 клеток</li>
+            <li>Кот перепрыгивает между местами, а бабушка гуляет по двору сама, и её можно пропустить нажатием</li>
+            <li>Пруды, клумбы, скамейки и дома не дают проехать напрямик</li>
+            <li>Звёзды за прохождение открывают следующие страны</li>
+            <li>Время суток и погода меняют вид двора, идёт дождь</li>
+            <li>Приближение двора ползунком сбоку</li>
+            <li>Генератор уровней гарантирует, что каждый двор можно пройти</li>
+          </ul>
+          <ul class="facts">
+            <li>Без интернета</li>
+            <li>Без доната</li>
+          </ul>
           <div class="links">
             <span class="btn ghost" aria-disabled="true">Скоро</span>
             <a class="text" href="https://antidot529.github.io/yardlock-privacy/">Политика конфиденциальности</a>
