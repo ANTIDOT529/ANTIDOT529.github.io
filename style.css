@@ -17,8 +17,8 @@ a:focus-visible,.btn:focus-visible{outline:3px solid var(--green);outline-offset
 
 /* главная */
 .hero{padding:clamp(56px,12vw,120px) 0 clamp(40px,8vw,72px);text-align:center}
-.hero .logo{font-size:clamp(3rem,13vw,7rem)}
-.slogan{margin:18px 0 0;font-size:clamp(.7rem,2.4vw,.95rem);font-weight:800;letter-spacing:.42em;text-indent:.42em;color:var(--muted)}
+.hero .logo{font-size:clamp(3rem,14.5vw,11.5rem)}
+.slogan{margin:26px 0 0;font-size:clamp(.75rem,2.6vw,1.45rem);font-weight:800;letter-spacing:.42em;text-indent:.42em;color:var(--muted)}
 .lead{max-width:520px;margin:28px auto 0;font-size:1.1rem;color:var(--text)}
 h2{font-size:clamp(1.4rem,4vw,1.9rem);margin:0 0 24px;font-weight:800}
 .games{display:grid;gap:20px}
