@@ -118,6 +118,10 @@ section,[id]{scroll-margin-top:72px}
 .timeline h3{margin:10px 0 0;font-size:1.2rem;font-weight:800}
 .timeline p{margin:6px 0 0;color:var(--text)}
 .timeline:not(.open) li.extra{display:none}
+.intro.expanded{align-items:start}
+@keyframes news-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.timeline li.extra.in{animation:news-in .45s cubic-bezier(.2,.7,.2,1) both}
+.timeline li.extra.out{opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s}
 .news-more{margin-top:24px;padding:10px 18px;border:0;border-radius:999px;background:rgba(32,32,32,.07);color:var(--ink);font:inherit;font-size:.9rem;font-weight:800;cursor:pointer}
 .news-more:hover{background:rgba(116,182,126,.22)}
 .news-more:focus-visible{outline:3px solid var(--green);outline-offset:3px}

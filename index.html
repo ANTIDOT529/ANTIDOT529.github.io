@@ -7,7 +7,7 @@
 <meta name="description" content="ANTIDOT, небольшая студия простых и добрых игр для Android: Blobbi и Yardlock.">
 <meta name="theme-color" content="#F5F6F8">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 40'%3E%3Crect x='1.5' y='1.5' width='17' height='37' rx='8.5' fill='none' stroke='%23202020' stroke-width='3'/%3E%3Cpath d='M1.5 20h17v10a8.5 8.5 0 0 1-8.5 8.5h0A8.5 8.5 0 0 1 1.5 30z' fill='%23202020'/%3E%3Crect x='8' y='14' width='4' height='12' rx='.8' fill='%2374B67E'/%3E%3Crect x='4' y='18' width='12' height='4' rx='.8' fill='%2374B67E'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="style.css?v=11">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -152,16 +152,85 @@
   <div class="wrap foot-end">2026 ANTIDOT</div>
 </footer>
 <script>
-/* В ленте видны только свежие новости, остальные открываются кнопкой */
+/* В ленте видны только свежие новости, остальные открываются кнопкой.
+   Тёмная карточка «О студии» при этом сохраняет свою высоту. */
 (function () {
-  var SHOW = 2;
+  var SHOW = 2, DUR = 450;
   var list = document.getElementById('news-list');
   var btn = document.querySelector('.news-more');
+  var card = document.querySelector('.news-card');
+  var about = document.querySelector('.about-card');
+  var intro = document.querySelector('.intro');
   if (!list || !btn || list.children.length <= SHOW) return;
-  for (var i = SHOW; i < list.children.length; i++) list.children[i].classList.add('extra');
+  var extras = [];
+  for (var i = SHOW; i < list.children.length; i++) {
+    list.children[i].classList.add('extra');
+    extras.push(list.children[i]);
+  }
   btn.hidden = false;
+  var busy = false;
+  var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // плавно меняем высоту карточки новостей от from до to
+  function slide(from, to, done) {
+    if (still) { done(); return; }
+    card.style.overflow = 'hidden';
+    card.style.height = from + 'px';
+    card.offsetHeight;
+    card.style.transition = 'height ' + DUR + 'ms cubic-bezier(.2,.7,.2,1)';
+    card.style.height = to + 'px';
+    setTimeout(function () {
+      card.style.transition = card.style.height = card.style.overflow = '';
+      done();
+    }, DUR + 30);
+  }
+
+  function open() {
+    about.style.height = about.offsetHeight + 'px';
+    intro.classList.add('expanded');
+    var from = card.offsetHeight;
+    list.classList.add('open');
+    extras.forEach(function (li, k) {
+      li.classList.remove('out');
+      li.style.animationDelay = (k * 70) + 'ms';
+      li.classList.add('in');
+    });
+    btn.setAttribute('aria-expanded', 'true');
+    slide(from, card.offsetHeight, function () { busy = false; });
+  }
+
+  function close() {
+    var from = card.offsetHeight;
+    list.classList.remove('open');
+    var to = card.offsetHeight;
+    list.classList.add('open');
+    extras.forEach(function (li) { li.classList.remove('in'); li.classList.add('out'); });
+    btn.setAttribute('aria-expanded', 'false');
+    slide(from, to, function () {
+      list.classList.remove('open');
+      extras.forEach(function (li) { li.classList.remove('out'); });
+      intro.classList.remove('expanded');
+      about.style.height = '';
+      busy = false;
+    });
+  }
+
   btn.addEventListener('click', function () {
-    btn.setAttribute('aria-expanded', list.classList.toggle('open') ? 'true' : 'false');
+    if (busy) return;
+    busy = true;
+    if (list.classList.contains('open')) close(); else open();
+  });
+
+  // при смене ширины окна пересчитываем высоту тёмной карточки
+  window.addEventListener('resize', function () {
+    if (!intro.classList.contains('expanded') || busy) return;
+    list.classList.remove('open');
+    intro.classList.remove('expanded');
+    about.style.height = '';
+    var h = about.offsetHeight;
+    intro.classList.add('expanded');
+    list.classList.add('open');
+    about.style.height = h + 'px';
   });
 })();
 </script>
