@@ -24,6 +24,8 @@
     'Yardlock на модерации в RuStore': 'Yardlock is in review on RuStore',
     'Yardlock отправлен в RuStore и проходит модерацию. Как только игру одобрят, здесь появится ссылка для скачивания.': 'Yardlock has been submitted to RuStore and is now in review. As soon as it is approved, a download link will appear here.',
     'На модерации в RuStore': 'In review on RuStore',
+    'Все новости': 'All news',
+    'Свернуть': 'Show less',
     'Открылся сайт студии': 'The studio website is open',
     'Здесь будут новости об играх, обновлениях и новых проектах.': 'News about our games, updates and new projects will appear here.',
     'Доступна в RuStore': 'Available on RuStore',
